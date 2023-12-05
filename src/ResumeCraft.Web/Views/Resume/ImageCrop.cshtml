@@ -1,0 +1,97 @@
+@{
+    ViewData["Title"] = "Image Crop";
+    Layout = "_CroppieLayout";
+}
+<h2 class="text-dark mb-3">@ViewData["Title"]</h2>
+
+
+<div class="card col-lg-7">
+    <div class="card-body">
+        <form id="cropper" method="post" asp-antiforgery="true" asp-area="" asp-controller="Resume" asp-action="ImageCrop">
+            <div id="cropper">
+                <div class="text-center">
+                    @if (TempData["message"] != null)
+                    {
+                        <h6 class="text-success">@TempData["message"]</h6>
+                    }
+                </div>
+            </div>
+        </form>
+        <hr>
+        <div class="row mt-4" style="margin-left: 05px">
+            <div class="col-lg-9">
+                <input type="file" id="BrowseFile" class="form-control" value="Select Image" accept="image/*" />
+            </div>
+            <div class="col-lg-3">
+                <button id="btnupload" name="btnupload" class="btn btn-success" disabled> Image Crop </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.cr-image').addClass('d-none');
+        });
+
+        var basic = $('#cropper').croppie
+            ({
+                viewport: { width: 300, height: 300 },
+                boundary: { width: 700, height: 400 },
+                showZoomer: true,
+                url: '',
+                // url: '/DefaultImages/preview.png',
+                format: 'png' | 'jpg' | 'jpeg'
+            });
+
+        function readFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#cropper').croppie('bind', {
+                        url: e.target.result
+                    });
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('#BrowseFile').on('change', function () {
+            $('.cr-image').removeClass('d-none');
+            readFile(this);
+            $('#btnupload').removeAttr('disabled');
+        });
+
+        $('#btnupload').on('click', function () {
+            basic.croppie('result', 'blob').then(function (blob) {
+                var formData = new FormData();
+                // formData.append('filename', 'FileName.png');
+                formData.append('imageFile', blob);
+                var myAppUrlSettings =
+                {
+                    MyUsefulUrl: '@Url.Action("ImageCrop", "Resume")'
+                }
+
+                var request = new XMLHttpRequest();
+                request.open('POST', myAppUrlSettings.MyUsefulUrl);
+                request.send(formData);
+                request.onreadystatechange = function () {
+                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                        var response = JSON.parse(request.responseText);
+                        if (response.message == "OK") {
+                            // alert('Image Cropped Successfully!');
+                            window.location.reload();
+                        }
+                        if (response.message == "ERROR") {
+                            window.location.reload();
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}

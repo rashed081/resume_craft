@@ -1,0 +1,89 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeCraft.Domain", "ResumeCraft.Domain\ResumeCraft.Domain.csproj", "{9D9840BC-418F-4611-BC76-FBEC2AE736BC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeCraft.Persistence", "ResumeCraft.Persistence\ResumeCraft.Persistence.csproj", "{310C72CA-38A2-430A-BFC9-563D2F293931}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3E3C46FA-B89C-426A-BF39-D0FBB2AAE1E4} = {3E3C46FA-B89C-426A-BF39-D0FBB2AAE1E4}
+		{9D9840BC-418F-4611-BC76-FBEC2AE736BC} = {9D9840BC-418F-4611-BC76-FBEC2AE736BC}
+		{DC17A9DE-8605-4F79-A21D-A28E3CC71133} = {DC17A9DE-8605-4F79-A21D-A28E3CC71133}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeCraft.Infrastructure", "ResumeCraft.Infrastructure\ResumeCraft.Infrastructure.csproj", "{3E3C46FA-B89C-426A-BF39-D0FBB2AAE1E4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DC17A9DE-8605-4F79-A21D-A28E3CC71133} = {DC17A9DE-8605-4F79-A21D-A28E3CC71133}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeCraft.Application", "ResumeCraft.Application\ResumeCraft.Application.csproj", "{DC17A9DE-8605-4F79-A21D-A28E3CC71133}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9D9840BC-418F-4611-BC76-FBEC2AE736BC} = {9D9840BC-418F-4611-BC76-FBEC2AE736BC}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeCraft.Web", "ResumeCraft.Web\ResumeCraft.Web.csproj", "{7B213CB8-B201-48C3-AB9A-DA94F2BF6E80}"
+	ProjectSection(ProjectDependencies) = postProject
+		{310C72CA-38A2-430A-BFC9-563D2F293931} = {310C72CA-38A2-430A-BFC9-563D2F293931}
+		{3E3C46FA-B89C-426A-BF39-D0FBB2AAE1E4} = {3E3C46FA-B89C-426A-BF39-D0FBB2AAE1E4}
+		{DC17A9DE-8605-4F79-A21D-A28E3CC71133} = {DC17A9DE-8605-4F79-A21D-A28E3CC71133}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeCraft.Api", "ResumeCraft.Api\ResumeCraft.Api.csproj", "{7EFE39F9-5F83-4E67-961C-94E54E02D75F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WorkerServices", "WorkerServices", "{C9F47004-786C-4D11-A8C1-A74D6F8676AC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeCraft.PdfDeleteWorker", "ResumeCraft.PdfWorker\ResumeCraft.PdfDeleteWorker.csproj", "{0911E9C7-8C7C-452F-A234-92330B3B7035}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResumeCraft.EmailWorker", "ResumeCraft.EmailWorker\ResumeCraft.EmailWorker.csproj", "{4343292F-DBE8-4272-ADC4-7F79302CB9D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D9840BC-418F-4611-BC76-FBEC2AE736BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D9840BC-418F-4611-BC76-FBEC2AE736BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D9840BC-418F-4611-BC76-FBEC2AE736BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D9840BC-418F-4611-BC76-FBEC2AE736BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{310C72CA-38A2-430A-BFC9-563D2F293931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{310C72CA-38A2-430A-BFC9-563D2F293931}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{310C72CA-38A2-430A-BFC9-563D2F293931}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{310C72CA-38A2-430A-BFC9-563D2F293931}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E3C46FA-B89C-426A-BF39-D0FBB2AAE1E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E3C46FA-B89C-426A-BF39-D0FBB2AAE1E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E3C46FA-B89C-426A-BF39-D0FBB2AAE1E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E3C46FA-B89C-426A-BF39-D0FBB2AAE1E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC17A9DE-8605-4F79-A21D-A28E3CC71133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC17A9DE-8605-4F79-A21D-A28E3CC71133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC17A9DE-8605-4F79-A21D-A28E3CC71133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC17A9DE-8605-4F79-A21D-A28E3CC71133}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B213CB8-B201-48C3-AB9A-DA94F2BF6E80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B213CB8-B201-48C3-AB9A-DA94F2BF6E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B213CB8-B201-48C3-AB9A-DA94F2BF6E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B213CB8-B201-48C3-AB9A-DA94F2BF6E80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EFE39F9-5F83-4E67-961C-94E54E02D75F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EFE39F9-5F83-4E67-961C-94E54E02D75F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EFE39F9-5F83-4E67-961C-94E54E02D75F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EFE39F9-5F83-4E67-961C-94E54E02D75F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0911E9C7-8C7C-452F-A234-92330B3B7035}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0911E9C7-8C7C-452F-A234-92330B3B7035}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0911E9C7-8C7C-452F-A234-92330B3B7035}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0911E9C7-8C7C-452F-A234-92330B3B7035}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4343292F-DBE8-4272-ADC4-7F79302CB9D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4343292F-DBE8-4272-ADC4-7F79302CB9D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4343292F-DBE8-4272-ADC4-7F79302CB9D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4343292F-DBE8-4272-ADC4-7F79302CB9D3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0911E9C7-8C7C-452F-A234-92330B3B7035} = {C9F47004-786C-4D11-A8C1-A74D6F8676AC}
+		{4343292F-DBE8-4272-ADC4-7F79302CB9D3} = {C9F47004-786C-4D11-A8C1-A74D6F8676AC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE0C8182-3BF4-404E-9DE0-46C800A8CE0B}
+	EndGlobalSection
+EndGlobal

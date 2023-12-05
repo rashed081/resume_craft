@@ -1,0 +1,39 @@
+/*
+####################
+#    Base Style    #
+####################
+*/
+
+@page {
+    size: 215.9mm 279.4mm;
+}
+@media print {
+    @page {
+        size: 215.9mm 279.4mm;
+    }
+}
+.rct {
+    padding: 0.3in;
+    width: 215.9mm;
+    height: 279.4mm;
+}
+.rct__page_break {
+    page-break-before: always;
+    padding-top: 0.3in;
+}
+
+/*
+#######################################
+#    Override Bootsrap Class Style    #
+#######################################
+*/
+
+.rct > .container-fluid {
+    padding: 0;
+}
+
+/*
+####################################
+#    All Sections Common Desing    #
+####################################
+*/

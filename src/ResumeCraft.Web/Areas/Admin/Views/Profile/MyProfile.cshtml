@@ -1,0 +1,146 @@
+@using ResumeCraft.Application.Features.Admin.Models;
+@model AdminProfileModel
+@{
+    ViewData["Title"] = "MyProfile";
+}
+@section Styles
+{
+    <link rel="stylesheet" href="/lib/croppie/croppie.css" />
+    <style>
+        .image-input-placeholder {
+            background-image: url('/Admin/assets/media/svg/avatars/blank.svg');
+        }
+
+        [data-bs-theme="dark"] .image-input-placeholder {
+            background-image: url('/Admin/assets/media/svg/avatars/blank-dark.svg');
+        }
+    </style>
+}
+<div id="kt_app_content" class="app-content flex-column-fluid p-10">
+    
+    <div class="row justify-content-center g-3">
+        <div class="col-lg-3 col-sm-12 text-lg-end text-sm-start">
+            <div class="image-input image-input-circle" data-kt-image-input="true" style="background-image: url(/Admin/assets/media/svg/avatars/blank.svg)">
+                <!--begin::Image preview wrapper-->
+                <div class="image-input-wrapper w-150px h-150px" style="background-image: url(@(Model.ImageUrl==null?"/Admin/assets/media/svg/avatars/blank-dark.svg":$"/upload/userImage/{Model.ImageUrl}"))"></div>
+                <!--end::Image preview wrapper-->
+                <!--begin::Edit button-->
+                <label class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                       data-kt-image-input-action="change"
+                       data-bs-toggle="tooltip"
+                       data-bs-dismiss="click"
+                       title="Change avatar">
+                    <i class="ki-duotone ki-pencil fs-6"><span class="path1"></span><span class="path2"></span></i>
+
+                    <!--begin::Inputs-->
+                    <input type="file" id="img-profile" name="avatar" accept=".png, .jpg, .jpeg" />
+                    <input type="hidden" name="avatar_remove" />
+                    <!--end::Inputs-->
+                </label>
+                <!--end::Edit button-->
+                <!--begin::Cancel button-->
+                <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                      data-kt-image-input-action="cancel"
+                      data-bs-toggle="tooltip"
+                      data-bs-dismiss="click"
+                      title="Cancel avatar">
+                    <i class="ki-outline ki-cross fs-3"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+           <div class="ps-lg-5 ps-sm-0 position-relative">
+                <h1>@Model.FirstName @Model.LastName</h1>
+                <div >
+                    <p class="fs-4 lh-1"><strong>Email:</strong> @Model.Email</p>
+                    <p class="fs-4 lh-1"><strong>Mobile:</strong> @Model.PhoneNumber</p>
+                    <p class="fs-4 lh-1"><strong>Gender:</strong> @(Model.Gender == null ? "Not selected" : Model.Gender.ToString())</p>
+                    <p class="fs-4 lh-1"><strong>Birth date:</strong> @(((DateTime)Model.DateOfBirth!).ToString("dd, MMM, yyyy"))</p>
+                </div>
+                <a asp-action="edit" asp-controller="profile" asp-area="admin" class="btn btn-dark btn-sm position-absolute top-0 end-0 cursor-pointer hover-dark">Edit</a>
+           </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <partial name="_ResponsePartial">
+        </div>
+    </div>
+</div>
+
+
+<div class="modal bg-body fade" tabindex="-1" id="imageCropModal">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content shadow-none" id="block">
+            <div class="modal-header">
+                <h3 class="modal-title">Resize Image</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+                <div id="cropContainer"></div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="saveProfileImg" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    
+    <script src="/lib/croppie/croppie.js"></script>
+    <script>
+        const basic = $("#cropContainer").croppie({
+            viewport: {width:300, height:300},
+            boundary: {width:800, height:500},
+            showZoomer:true,
+            url: '/Admin/assets/media/svg/avatars/blank-dark.svg',
+            format:'png'|'jpeg'|'webp'
+        });
+
+        function readFile(input){
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#cropContainer").croppie('bind', {
+                        url:e.target.result
+                    })
+                }
+                reader.readAsDataURL(input.files[0])
+            }
+        }
+
+        $('#img-profile').on('change',function(){
+            $('#imageCropModal').modal('show');
+            readFile(this);
+        });
+
+        $("#saveProfileImg").on('click', () => {
+            var block = document.getElementById("block");
+            var blockUI = new KTBlockUI(block);
+            blockUI.block();
+            basic.croppie('result', 'blob').then(function (file) {
+                var form = new FormData();
+                form.append("file", file);
+                axios.post('/admin/profile/saveImage', form)
+                    .then(function (response) {
+                        window.location.reload();
+                        
+                    })
+                    .catch(function (error) {
+                        blockUI.relese();
+                    });
+            });
+        });
+    </script>
+    
+}

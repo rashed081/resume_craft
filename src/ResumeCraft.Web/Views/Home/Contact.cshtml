@@ -1,0 +1,170 @@
+﻿@section Styles
+{
+    <link href="~/assets/contactassest/css/leaflet.bundle.css" rel="stylesheet" />
+    <link href="~/assets/contactassest/css/leaflet.css" rel="stylesheet" />
+
+    <link href="~/assets/contactassest/css/style.bundle.css" rel="stylesheet" />
+
+
+}
+
+<br /><br /><br />
+
+<!--begin::Main-->
+<div class="app-main flex-column flex-row-fluid mt-5" id="kt_app_main" >
+	<!--begin::Content wrapper-->
+		<!--begin::Toolbar-->
+		<!--end::Toolbar-->
+		<!--begin::Content-->
+		<div id="kt_app_content" class="app-content flex-column-fluid mt-7">
+			<!--begin::Content container-->
+		<div id="kt_app_content_container" class="app-container container-fluid mt-7">
+				<!--begin::Contact-->
+				<div class="card">
+					<!--begin::Body-->
+					<div class="card-body p-lg-17">
+						<!--begin::Row-->
+						<div class="row mb-3">
+							<!--begin::Col-->
+							<div class="col-md-6 pe-lg-10">
+								<!--begin::Form-->
+								<form action="" class="form mb-15" method="post" id="kt_contact_form">
+									<h1 class="fw-bold text-dark mb-9">Send Us Email</h1>
+									<!--begin::Input group-->
+									<div class="row mb-5">
+										<!--begin::Col-->
+										<div class="col-md-6 fv-row">
+											<!--begin::Label-->
+											<label class="fs-5 fw-semibold mb-2">Name</label>
+											<!--end::Label-->
+											<!--begin::Input-->
+											<input type="text" class="form-control form-control-solid" placeholder="" name="name" />
+											<!--end::Input-->
+										</div>
+										<!--end::Col-->
+										<!--begin::Col-->
+										<div class="col-md-6 fv-row">
+											<!--end::Label-->
+											<label class="fs-5 fw-semibold mb-2">Email</label>
+											<!--end::Label-->
+											<!--end::Input-->
+											<input type="text" class="form-control form-control-solid" placeholder="" name="email" />
+											<!--end::Input-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Input group-->
+									<!--begin::Input group-->
+									<div class="d-flex flex-column mb-5 fv-row">
+										<!--begin::Label-->
+										<label class="fs-5 fw-semibold mb-2">Subject</label>
+										<!--end::Label-->
+										<!--begin::Input-->
+										<input class="form-control form-control-solid" placeholder="" name="subject" />
+										<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+									<!--begin::Input group-->
+									<div class="d-flex flex-column mb-10 fv-row">
+										<label class="fs-6 fw-semibold mb-2">Message</label>
+										<textarea class="form-control form-control-solid" rows="6" name="message" placeholder=""></textarea>
+									</div>
+								<input type="hidden" @* asp-for="Recaptcha" *@ id="recaptchaInput" />
+									<!--end::Input group-->
+									<!--begin::Submit-->
+									<button type="submit" class="btn btn-primary" id="kt_contact_submit_button">
+										<!--begin::Indicator label-->
+										<span class="indicator-label">Send Feedback</span>
+										<!--end::Indicator label-->
+										<!--begin::Indicator progress-->
+										<span class="indicator-progress">
+											Please wait...
+											<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+										</span>
+										<!--end::Indicator progress-->
+									</button>
+									<!--end::Submit-->
+								</form>
+								<!--end::Form-->
+							</div>
+							<!--end::Col-->
+							<!--begin::Col-->
+							<div class="col-md-6 ps-lg-10 ">
+								<!--begin::Map-->
+								<div id="kt_contact_map" class="w-100 rounded mb-2 mb-lg-0 mt-2" style="height: 486px; position:sticky"></div>
+							</div>
+							<!--end::Col-->
+						</div>
+						<!--end::Row-->
+						<!--begin::Row-->
+						<div class="row g-5 mb-3 mb-lg-15">
+							<!--begin::Col-->
+							<div class="col-sm-6 pe-lg-10">
+								<!--begin::Phone-->
+								<div class="bg-light card-rounded d-flex flex-column flex-center flex-center p-10 h-100">
+									<!--begin::Icon-->
+									<i class="ki-duotone ki-briefcase fs-3tx text-primary">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+									<!--end::Icon-->
+									<!--begin::Subtitle-->
+									<h1 class="text-dark fw-bold my-5">Let’s Speak</h1>
+									<!--end::Subtitle-->
+									<!--begin::Number-->
+								<div class="text-gray-700 fw-semibold fs-2">02 9853138</div>
+									<!--end::Number-->
+								</div>
+								<!--end::Phone-->
+							</div>
+							<!--end::Col-->
+							<!--begin::Col-->
+							<div class="col-sm-6 ps-lg-10">
+								<!--begin::Address-->
+								<div class="text-center bg-light card-rounded d-flex flex-column flex-center p-5 h-100">
+									<!--begin::Icon-->
+									<i class="ki-duotone ki-geolocation fs-3tx text-primary">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+									<!--end::Icon-->
+									<!--begin::Subtitle-->
+									<h1 class="text-dark fw-bold my-5">Our Head Office</h1>
+									<!--end::Subtitle-->
+									<!--begin::Description-->
+								<div class="text-gray-700 fs-3 fw-semibold">House # 184 (9th Floor), Senpara parbata,<br/> Begum Rokeya Sarani, Mirpur-10, Dhaka,</div>
+									<!--end::Description-->
+								</div>
+								<!--end::Address-->
+							</div>
+							<!--end::Col-->
+						</div>
+				
+					</div>
+					<!--end::Body-->
+				</div>
+				<!--end::Contact-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+
+	<!--end::Content wrapper-->
+	<!--begin::Footer-->
+	
+	<!--end::Footer-->
+</div>
+<br />
+<br />
+<br />
+@section Scripts
+{
+	<partial name="_RecaptchaScriptPartial" />
+	<script src="~/assets/contactassest/js/leaflet.js.map"></script>
+    <script src="~/assets/contactassest/js/contact.js"></script>
+    <script src="~/assets/contactassest/js/scripts.bundle.js"></script>
+    <script src="~/assets/contactassest/js/leaflet.bundle.js"></script>
+    <script src="~/assets/contactassest/js/plugins.bundle.js"></script>
+	<script src="~/assets/contactassest/js/leaflet.bundle.js"></script>
+	<script src="~/assets/contactassest/js/leaflet.js"></script>
+}

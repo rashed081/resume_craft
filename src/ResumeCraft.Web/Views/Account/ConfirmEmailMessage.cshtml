@@ -1,0 +1,11 @@
+@model ConfirmEmaiMessageModel
+@{
+    ViewData["Title"] = "Confirm Email | " + Model.Name;
+    Layout = "_AccountLayout";
+}
+
+<div class="w-lg-500px p-10 p-lg-15 mx-auto">
+    <h1>Dear <strong style="color:#FF914D;">@Model.Name</strong>, you need to confirm your registration.</h1>
+    <p class="fs-5">An email was sent to <strong class="text-info">@Model.Email</strong> this account with a confirmation link. Please confirm your registration via clicking that link. Thank you.</p>
+</div>
+

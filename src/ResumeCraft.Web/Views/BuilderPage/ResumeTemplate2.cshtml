@@ -1,0 +1,554 @@
+@using Microsoft.AspNetCore.Http
+@model ResumeCraft.Application.Features.Resumes.DTOs.ResumeDTO
+@{
+    Layout = null;
+
+    var cssUrl = (string assetUrl) => $"{Context.Request.Scheme}://{Context.Request.Host.ToString()}{Url.Content(assetUrl)}";
+
+    var contact = !Model.Contact.Equals(null) && !Model.Contact.Value.Equals(null) ? Model.Contact : null;
+    var summary = !Model.Summary.Equals(null) && !Model.Summary.Value.Equals(null) ? Model.Summary : null;
+    var experiences = !Model.Experiences.Equals(null) && Model.Experiences.Count() > 0 ? Model.Experiences : null;
+    var skills = !Model.Skills.Equals(null) && Model.Skills.Count() > 0 ? Model.Skills : null;
+    var awards = !Model.Awards.Equals(null) && Model.Awards.Count() > 0 ? Model.Awards : null;
+    var certifications = !Model.Certifications.Equals(null) && Model.Certifications.Count() > 0 ? Model.Certifications : null;
+    var curricularActivities = !Model.CurricularActivities.Equals(null) && Model.CurricularActivities.Count() > 0 ? Model.CurricularActivities : null;
+    var educations = !Model.Educations.Equals(null) && Model.Educations.Count() > 0 ? Model.Educations : null;
+    var interests = !Model.Interests.Equals(null) && Model.Interests.Count() > 0 ? Model.Interests : null;
+    var projects = !Model.Projects.Equals(null) && Model.Projects.Count() > 0 ? Model.Projects : null;
+    var publications = !Model.Publications.Equals(null) && Model.Publications.Count() > 0 ? Model.Publications : null;
+    var references = !Model.References.Equals(null) && Model.References.Count() > 0 ? Model.References : null;
+}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="@cssUrl("~/template/vendor/bootstrap/css/bootstrap.min.css")" />
+    <link rel="stylesheet" href="@cssUrl("~/template/css/resume/template_2.css")" />
+</head>
+<body>
+    <main class="rct">
+        <div class="container-fluid">
+            @if (contact != null)
+            {
+                <section class="rct__section--personal_detail row">
+                    <div class="rct__section--personal_detail__info col-xs-9">
+                        <h1 class="rct__section--personal_detail__info__full_name text-uppercase">
+                            @if (contact.Value.FirstName != null && !contact.Value.FirstName.Equals(string.Empty))
+                            {
+                                <span class="rct__section--personal_detail__info__full_name--first_name">@contact.Value.FirstName</span>
+                            }
+                            @if (contact.Value.LastName != null && !contact.Value.LastName.Equals(string.Empty))
+                            {
+                                <span class="rct__section--personal_detail__info__full_name--last_name">@contact.Value.LastName</span>
+                            }
+                        </h1>
+                        <div class="rct__section--personal_detail__info__contact_info">
+                            @if (contact.Value.Socials != null && contact.Value.Socials.Count() > 0)
+                            {
+                                @foreach (var social in contact.Value.Socials)
+                                {
+                                    <span class="rct__section--personal_detail__info__contact_info">
+                                        <a href="@social.ProfileUrl">@social.PlatformName</a>
+                                    </span>
+                                    <br />
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="rct__section--personal_detail__image col-xs-3">
+                        @if (contact.Value.ImageUrl != null && !contact.Value.ImageUrl.Equals(string.Empty))
+                        {
+                            <img class="img-circle"
+                                 src="@contact.Value.ImageUrl"
+                                 alt="@(contact.Value.FullName != null && !contact.Value.FullName.Equals(string.Empty) ? contact.Value.FullName : "")" />
+                        }
+                    </div>
+                </section>
+            }
+            @if (summary != null)
+            {
+                <section class="rct__section--summary row">
+                    <div class="rct__section--summary__title">
+                        <h2>Summary</h2>
+                    </div>
+                    <div class="rct__section--summary__content">
+                        @if (summary.Value.Content != null && !summary.Value.Content.Equals(string.Empty))
+                        {
+                            <p class="text-justify">@Html.Raw(summary.Value.Content)</p>
+                        }
+                    </div>
+                </section>
+            }
+            @if (experiences != null)
+            {
+                <section class="rct__section--experience row">
+                    <div class="rct__section--experience__title">
+                        <h2>Experiences</h2>
+                    </div>
+                    <div class="rct__section--experience__content">
+                        @foreach (var experience in experiences)
+                        {
+                            @if (!experience.Equals(null))
+                            {
+                                <div class="rct__section--experience__content__container row">
+                                    <div class="rct__section--experience__content__container__datetime col-xs-3">
+                                        @if (!experience.StartDate.Equals(null))
+                                        {
+                                            <span class="rct__section--experience__content__container__datetime__start_date">@experience.StartDate.Value.ToString("MMM yyyy")</span>
+                                        }
+                                        @if (!experience.EndDate.Equals(null))
+                                        {
+                                            <span class="rct__section--experience__content__container__datetime__end_date">@experience.EndDate.Value.ToString("MMM yyyy")</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="rct__section--experience__content__container__datetime__end_date">Present</span>
+                                        }
+                                    </div>
+                                    <div class="rct__section--experience__content__container__info col-xs-9">
+                                        @if (experience.Designation != null && !experience.Designation.Equals(string.Empty))
+                                        {
+                                            <strong class="rct__section--experience__content__container__info__designation text-capitalize">
+                                                @experience.Designation
+                                            </strong>
+                                        }
+                                        @if (experience.CompanyName != null && !experience.CompanyName.Equals(string.Empty))
+                                        {
+                                            <strong class="rct__section--experience__content__container__info__company_name text-capitalize">
+                                                @experience.CompanyName
+                                            </strong>
+                                        }
+                                        @if (experience.CompanyName != null && !experience.CompanyName.Equals(string.Empty))
+                                        {
+                                            <div class="rct__section--experience__content__container__info__achivement">
+                                                @Html.Raw(experience.Achievement)
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </section>
+            }
+            @if (skills != null)
+            {
+                <section class="rct__section--skill row">
+                    <div class="rct__section--skill__title">
+                        <h2>Skills</h2>
+                    </div>
+                    <div class="rct__section--skill__content">
+                        <ul>
+                            @foreach (var skill in skills)
+                            {
+                                @if (!skill.Equals(null) && skill.Name != null && !skill.Name.Equals(string.Empty))
+                                {
+                                    <li>
+                                        <span>@Html.Raw(skill.Name)</span>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </section>
+            }
+            @if (awards != null)
+            {
+                <section class="rct__section--award row">
+                    <div class="rct__section--award__title">
+                        <h2>Award</h2>
+                    </div>
+                    <div class="rct__section--award__content">
+                        @foreach (var award in awards)
+                        {
+                            @if (!award.Equals(null))
+                            {
+                                <div class="rct__section--award__content__container">
+                                    @if (award.Title != null && !award.Title.Equals(string.Empty))
+                                    {
+                                        <span class="rct__section--award__content__container__title_name">@award.Title</span>
+                                    }
+                                    @if (award.InstituteName != null && !award.InstituteName.Equals(string.Empty))
+                                    {
+                                        <strong class="rct__section--award__content__container__institute_name text-capitalize">@award.InstituteName</strong>
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+                </section>
+            }
+            @if (certifications != null)
+            {
+                <section class="rct__section--certification row">
+                    <div class="rct__section--certification__title">
+                        <h2>Certification</h2>
+                    </div>
+                    <div class="rct__section--certification__content">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Title</th>
+                                    <th>InstituteName</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var certification in certifications)
+                                {
+                                    @if (!certification.Equals(null))
+                                    {
+                                        <tr>
+                                            <td>
+                                                @if (!certification.StartDate.Equals(null))
+                                                {
+                                                    <span class="rct__section--certification__content__container__datetime__start_date">@certification.StartDate.Value.ToString("MMM yyyy")</span>
+                                                }
+                                                @if (!certification.EndDate.Equals(null))
+                                                {
+                                                    <span class="rct__section--certification__content__container__datetime__end_date">@certification.EndDate.Value.ToString("MMM yyyy")</span>
+                                                }
+                                            </td>
+
+                                            @if (certification.Title != null && !certification.Title.Equals(string.Empty))
+                                            {
+                                                <td>@certification.Title</td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+
+                                            @if (certification.InstituteName != null && !certification.InstituteName.Equals(string.Empty))
+                                            {
+                                                <td>@certification.InstituteName</td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            }
+            @if (curricularActivities != null)
+            {
+                <section class="rct__section--curricular_activity row">
+                    <div class="rct__section--curricular_activity__title">
+                        <h2>Curricular Activities</h2>
+                    </div>
+                    <div class="rct__section--curricular_activity__content">
+                        @foreach (var curricularActivitie in curricularActivities)
+                        {
+                            @if (curricularActivitie != null)
+                            {
+                                <div class="rct__section--curricular_activity__content__container row">
+                                    <div class="rct__section--curricular_activity__content__container__datetime col-xs-3">
+                                        @if (!curricularActivitie.StartDate.Equals(null))
+                                        {
+                                            <span class="rct__section--curricular_activity__content__container__datetime__start_date">@curricularActivitie.StartDate.Value.ToString("MMM yyyy")</span>
+                                        }
+                                        @if (!curricularActivitie.EndDate.Equals(null))
+                                        {
+                                            <span class="rct__section--curricular_activity__content__container__datetime__end_date">@curricularActivitie.EndDate.Value.ToString("MMM yyyy")</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="rct__section--curricular_activity__content__container__datetime__end_date">Present</span>
+                                        }
+                                    </div>
+                                    <div class="rct__section--curricular_activity__content__container__title_name col-xs-9 text-capitalize">
+                                        @if (curricularActivitie.Title != null && !curricularActivitie.Title.Equals(string.Empty))
+                                        {
+                                            <strong>@curricularActivitie.Title</strong>
+                                        }
+                                        @if (curricularActivitie.Organization != null && !curricularActivitie.Organization.Equals(string.Empty))
+                                        {
+                                            <span> &mdash; </span>
+                                            <strong>@curricularActivitie.Organization</strong>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </section>
+            }
+            @if (educations != null)
+            {
+                <section class="rct__section--education row">
+                    <div class="rct__section--education__title">
+                        <h2>Education</h2>
+                    </div>
+                    <div class="rct__section--education__content">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Field Of Study</th>
+                                    <th>Institute Name</th>
+                                    <th>Year</th>
+                                    <th>Grade</th>
+                                    <th>City</th>
+                                    <th>Country</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var education in educations)
+                                {
+                                    @if (!education.Equals(null))
+                                    {
+                                        <tr>
+                                            @if (education.FieldOfStudy != null && !education.FieldOfStudy.Equals(string.Empty))
+                                            {
+                                                <td>@education.FieldOfStudy</td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+
+                                            @if (education.InstituteName != null && !education.InstituteName.Equals(string.Empty))
+                                            {
+                                                <td>@education.InstituteName</td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+
+                                            <td>
+                                                @if (education.StartDate != null)
+                                                {
+                                                    <span class="rct__section--education__content__start_date">@education.StartDate.Value.ToString("yyyy")</span>
+                                                }
+                                                @if (education.EndDate != null)
+                                                {
+                                                    <span class="rct__section--education__content__end_date">@education.EndDate.Value.ToString("yyyy")</span>
+                                                }
+                                            </td>
+
+                                            @if (education.Grade != null && !education.Grade.Equals(string.Empty))
+                                            {
+                                                <td>@education.Grade</td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+
+                                            @if (education.City != null && !education.City.Equals(string.Empty))
+                                            {
+                                                <td>@education.City</td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+
+                                            @if (education.Country != null && !education.Country.Equals(string.Empty))
+                                            {
+                                                <td>@education.Country</td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            }
+            @if (interests != null)
+            {
+                <section class="rct__section--interest row">
+                    <div class="rct__section--interest__title">
+                        <h2>Interest</h2>
+                    </div>
+                    <div class="rct__section--interest__content">
+                        <ul>
+                            @foreach (var interest in interests)
+                            {
+                                @if (!interest.Equals(null) && interest.Name != null && !interest.Name.Equals(string.Empty))
+                                {
+                                    <li>@Html.Raw(interest.Name)</li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </section>
+            }
+            @if (projects != null)
+            {
+                <section class="rct__section--project row">
+                    <div class="rct__section--project__title">
+                        <h2>Projects</h2>
+                    </div>
+                    <div class="rct__section--project__content">
+                        @foreach (var project in projects)
+                        {
+                            @if (!project.Equals(null))
+                            {
+                                <div class="rct__section--project__content__container">
+                                    @if (project.ProjectName != null && !project.ProjectName.Equals(string.Empty))
+                                    {
+                                        <strong class="rct__section--project__content__container__project_name text-capitalize h5">
+                                            <a class="rct__section--project__content__container__repository_url"
+                                               href="https://github.com/yourusername/e-commerce-redesign">@project.ProjectName</a>
+                                        </strong>
+                                    }
+                                    @if (project.Description != null && !project.Description.Equals(string.Empty))
+                                    {
+                                        <p class="rct__section--project__content__container__description text-justify">@project.Description</p>
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+                </section>
+            }
+            @if (publications != null)
+            {
+                <section class="rct__section--publication row">
+                    <div class="rct__section--publication__title">
+                        <h2>Publications</h2>
+                    </div>
+                    <div class="rct__section--publication__content">
+                        @foreach (var publication in publications)
+                        {
+                            @if (!publication.Equals(null))
+                            {
+                                <div class="rct__section--publication__content__container row">
+                                    <div class="rct__section--publication__content__container__published_date col-xs-3">
+                                        @if (publication.PublishedDate != null)
+                                        {
+                                            <strong>@publication.PublishedDate.Value.ToString("MMM d, yyyy")</strong>
+                                        }
+                                    </div>
+                                    <div class="rct__section--publication__content__container__divider col-xs-1"></div>
+                                    <div class="rct__section--publication__content__container__info col-xs-8">
+                                        @if (publication.Title != null && !publication.Title.Equals(string.Empty))
+                                        {
+                                            <a class="rct__section--publication__content__container__info__title_name text-capitalize"
+                                               href="www.example.com/publication1">
+                                                <strong>@publication.Title</strong>
+                                            </a>
+                                        }
+                                        @if (publication.InstituteName != null && !publication.InstituteName.Equals(string.Empty))
+                                        {
+                                            <strong class="rct__section--publication__content__container__info__institute_name text-capitalize">
+                                                @publication.InstituteName
+                                            </strong>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </section>
+            }
+            @if (references != null)
+            {
+                <section class="rct__section--reference row">
+                    <div class="rct__section--reference__title">
+                        <h2>References</h2>
+                    </div>
+                    <div class="rct__section--reference__content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                @foreach (var reference in references)
+                                {
+                                    @if (!reference.Equals(null))
+                                    {
+                                        <div class="rct__section--reference__content__container col-xs-6">
+                                            <div class="row">
+                                                @if (reference.SupervisorName != null && !reference.SupervisorName.Equals(string.Empty))
+                                                {
+                                                    <div class="col-xs-12">
+                                                        <label><strong>Name:</strong></label>
+                                                        <span>@reference.SupervisorName</span>
+                                                    </div>
+                                                }
+                                                @if (reference.SupervisorDesignation != null && !reference.SupervisorDesignation.Equals(string.Empty))
+                                                {
+                                                    <div class="col-xs-12">
+                                                        <label><strong>Designation:</strong></label>
+                                                        <span>@reference.SupervisorDesignation</span>
+                                                    </div>
+                                                }
+                                                @if (reference.SupervisorInstituteName != null && !reference.SupervisorInstituteName.Equals(string.Empty))
+                                                {
+                                                    <div class="col-xs-12">
+                                                        <label><strong>Institute:</strong></label>
+                                                        <span>@reference.SupervisorInstituteName</span>
+                                                    </div>
+                                                }
+                                                @if (reference.SupervisorEmail != null && !reference.SupervisorEmail.Equals(string.Empty))
+                                                {
+                                                    <div class="col-xs-12">
+                                                        <label><strong>Email:</strong></label>
+                                                        <span><a href="mailto:@reference.SupervisorEmail">@reference.SupervisorEmail</a></span>
+                                                    </div>
+                                                }
+                                                @if (reference.SupervisorPhone != null && !reference.SupervisorPhone.Equals(string.Empty))
+                                                {
+                                                    <div class="col-xs-12">
+                                                        <label><strong>Phone:</strong></label>
+                                                        <span><a href="tel:@reference.SupervisorPhone">@reference.SupervisorPhone</a></span>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            }
+        </div>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var myList = document.querySelectorAll('[class^="rct__section--"][class$="__content"]>ul');
+            // console.log(myList);
+            myList.forEach(function (elem) {
+                var listItems = elem.children;
+                // console.log(listItems);
+                if (listItems.length > 3) {
+                    elem.classList.add("rct__two_column");
+                }
+            });
+
+            var topSize = document.querySelector(".rct__section--personal_detail").offsetHeight;
+            var section = document.querySelectorAll('[class^="rct__section--"][class$="row"]');
+            var rct = document.querySelector(".rct");
+            var _topSize = topSize;
+
+            for (let i = 0; i < section.length; i++) {
+                var elem = section[i];
+                topSize += elem.offsetHeight + 30;
+
+                if (rct.offsetHeight <= topSize) {
+                    if (elem.nextElementSibling !== null) {
+                        // Create the page break div element
+                        var pageBreakDiv = document.createElement("div");
+                        pageBreakDiv.className = "rct__page_break";
+
+                        elem.parentNode.insertBefore(pageBreakDiv, elem.nextSibling);
+                        topSize = _topSize
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

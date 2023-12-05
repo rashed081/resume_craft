@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center mx-sm-1 mx-md-2 mx-lg-4">
+
+    @{
+        await Html.RenderPartialAsync("~/Views/Home/LandingPage/_Hero.cshtml");
+    }
+    @{
+        await Html.RenderPartialAsync("~/Views/Home/LandingPage/_Feature.cshtml");
+    }
+    @{
+        await Html.RenderPartialAsync("~/Views/Home/LandingPage/_Details.cshtml");
+    }
+    @{
+        await Html.RenderPartialAsync("~/Views/Home/LandingPage/_Templates.cshtml");
+    }
+    @{
+        await Html.RenderPartialAsync("~/Views/Home/LandingPage/_Testimonials.cshtml");
+    }
+    @{
+        await Html.RenderPartialAsync("~/Views/Home/LandingPage/_FAQ.cshtml");
+    }
+    
+
+</div>

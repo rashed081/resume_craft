@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @if (ViewData["Title"] != null)
+    {
+        <title>@ViewData["Title"] - ResumeCraft</title>
+    }
+    else
+    {
+        <title>Page - ResumeCraft</title>
+    }
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/User/assets/css/croppie/croppie.min.css" rel="stylesheet" />
+    @* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css" /> *@
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="~/assets/css/style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&display=swap" rel="stylesheet">
+
+    @await RenderSectionAsync("Styles", false)
+</head>
+<body>
+    <header id="header " class="fixed-top  header-transparent  px-md-2 shadow bg-light">
+        <div class="container d-flex align-items-center justify-content-between py-3">
+            <div class="logo">
+                <h2><a href="@Url.Action("Index", "Home")">Resume<span class="text-white px-1 rounded" style="background-color: #FF914D">Craft</span></a></h2>
+            </div>
+
+            <nav id="navbar" class="navbar navbar -light">
+                <ul>
+                    <li><i class="nav-link scrollto"></i> <a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li><i class="nav-link scrollto"></i> <a href="@Url.Action("Index", "Home")#features">App Features</a></li>
+                    <li><i class="nav-link scrollto"></i> <a href="@Url.Action("Index", "Home")#template">Templates</a></li>
+                    <li><i class="nav-link scrollto"></i> <a href="@Url.Action("Index", "Home")#faq">F.A.Q</a></li>
+                    <li><a class="getstarted" href="@Url.Action("Login", "Account")">Sign in</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+
+        </div>
+    </header>
+
+    <div class="container">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>Devskill</h3>
+                        <p>
+                            House # 184 (9th Floor), Senpara parbata, <br />Begum Rokeya Sarani, Mirpur-10, <br />Dhaka, Bangladesh, Dhaka 1216<br>
+                            <strong>Email:</strong> info@devskill.com<br>
+                        </p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                         
+                            <li><i class="bx bx-chevron-right"></i> <a href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href=" @Url.Action("About", "Home")">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="@Url.Action("TermsOfUses", "Home")">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="@Url.Action("Contact","Home")">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <h6>Web Design</h6></li>
+                            <li><i class="bx bx-chevron-right"></i> <h6>Web Development</h6></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Social Networks</h4>
+                        <div class="social-links mt-3">
+                            <a href="https://www.facebook.com/devskillbd/" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="https://www.linkedin.com/company/devskill/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container py-4">
+            <div class="text-center">
+                &copy; Copyright <strong><span>ResumeCraft</span></strong>. All Rights Reserved
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/assets/vendor/aos/aos.js"></script>
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="~/assets/vendor/php-email-form/validate.js"></script>
+    <script src="~/User/assets/js/custom/croppie/croppie.min.js"></script>
+    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script> *@
+   <script src="~/assets/js/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('a.scrollto').on('click', function (e) {
+                e.preventDefault();
+
+                var target = $(this).attr('href');
+                $('html, body').animate({
+                    scrollTop: $(target).offset().top
+                }, 300);
+            });
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

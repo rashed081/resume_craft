@@ -1,0 +1,162 @@
+
+@{
+    ViewData["Title"] = "UserManagement";
+}
+@section Styles
+{
+    <link href="/Admin/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet"/>
+    <link href="/lib/DataTables/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+}
+<div id="kt_app_toolbar" class="app-toolbar pt-5">
+    <!--begin::Toolbar container-->
+    <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex align-items-stretch">
+        <!--begin::Toolbar wrapper-->
+        <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
+            <!--begin::Page title-->
+            <div class="page-title d-flex flex-column gap-1 me-3 mb-2">
+                <!--begin::Breadcrumb-->
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold mb-6">
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+                        <a asp-action="index" asp-controller="dashboard" asp-area="admin" class="text-gray-500">
+                            <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
+                        </a>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-gray-700 fw-bold lh-1"><a asp-action="userManagement" asp-controller="dashboard" asp-area="admin">User</a></li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-gray-700"><a asp-action="userManagement" asp-controller="dashboard" asp-area="admin">Management</a></li>
+                    <!--end::Item-->
+                </ul>
+                <!--end::Breadcrumb-->
+                <!--begin::Title-->
+                <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bolder fs-1 lh-0">User List</h1>
+                <!--end::Title-->
+            </div>
+            <!--end::Page title-->
+            <!--begin::Actions-->
+            <!--end::Actions-->
+        </div>
+        <!--end::Toolbar wrapper-->
+    </div>
+    <!--end::Toolbar container-->
+</div>
+
+
+
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div class="clearfix" style="margin-right:35px;">
+        <a asp-action="add" asp-controller="user" asp-area="admin" class="btn btn-success float-end">
+            <i class="ki-duotone ki-plus fs-1">
+            </i>
+            Add user
+        </a>
+    </div>
+   <div class="row justify-content-center">
+       <div class="col-md-6">
+            <partial name="_ResponsePartial">
+       </div>
+   </div>
+    <!--begin::Content container-->
+    <div id="kt_app_content_container" class="app-container container-fluid">
+      
+        <!--begin::Datatable-->
+        <table id="user" class="table align-middle table-row-dashed fs-6 gy-5" style="width:100%">
+            <thead>
+                <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                    <th></th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Date of birth</th>
+                    <th>Gender</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-600 fw-semibold">
+            </tbody>
+        </table>
+        <!--end::Datatable-->
+    </div>
+</div>
+<partial name="_ConfirmModalPartial"/>
+@section Scripts
+    {
+     <script src="/Admin/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+     <script src="/lib/DataTables/js/dataTables.bootstrap5.min.js"></script>
+    <partial name="_ConfirmModalScriptPartial" />
+    <!-- page script -->
+    <script>
+        $(function () {
+           const table = $('#user').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "/Admin/Dashboard/GetUserList",
+                },
+                "columnDefs": [
+
+                    {
+                        "orderable": true,
+                        "targets": [1, 2, 3, 4, 5],
+                    },
+                    {
+                        "orderable": false,
+                        "targets": [6],
+                    },
+                    {
+                        "orderable": false,
+                        "targets": [0],
+                        "render": function (data, type, row) {
+                            return `<img class="w-40px h-40px" src="${data}" alt="" />`;
+
+                        },
+                    },
+                    {
+                        "orderable": false,
+                        "targets": 7,
+                        "render": function (data, type, row) {
+                            return `<div class="dropdown">
+                                              <a class="btn text-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                              </a>
+
+                                              <ul class="dropdown-menu">
+                                                        <li><button id='delete' class="dropdown-item cursor-pointer show-bs-modal" data-id='${data}' value='${data}'>Delete</button></li>
+                                              </ul>
+                                            </div>`;
+                        }
+                    }
+                ]
+            });
+            $("#user").on('click', '.show-bs-modal', function(event) {
+                var id = $(this).attr("value");
+                var modal = $("#confirmModal");
+                modal.find(".modal-header h5").text("Delete");
+                modal.find(".modal-body p").text("Are you sure you want to delete this record?");
+                $("#dataId").val(id);
+                $("#dataForm").attr("action", "/admin/user/delete");
+                modal.modal("show");
+            });
+
+            $("#confirmButton").on("click", () => {
+                $("#dataForm").submit();
+            });
+        });
+    </script>
+}
+
+

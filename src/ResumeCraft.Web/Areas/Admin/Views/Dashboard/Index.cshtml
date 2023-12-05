@@ -1,0 +1,147 @@
+@using ResumeCraft.Application.Features.Admin.Models;
+@model AdminDashboardModel
+<!--begin::Toolbar-->
+<div id="kt_app_toolbar" class="app-toolbar pt-5">
+    <!--begin::Toolbar container-->
+    <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex align-items-stretch">
+        <!--begin::Toolbar wrapper-->
+        <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
+            <!--begin::Page title-->
+            <div class="page-title d-flex flex-column gap-1 me-3 mb-2">
+                <!--begin::Breadcrumb-->
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold mb-6">
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+                        <a asp-action="index" asp-controller="dashboard" asp-area="admin" class="text-gray-500">
+                            <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
+                        </a>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-gray-700 fw-bold lh-1"><a asp-action="index" asp-controller="dashboard" asp-area="admin">Dashboard</a></li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-gray-700"><a asp-action="index" asp-controller="dashboard" asp-area="admin">Index</a></li>
+                    <!--end::Item-->
+                </ul>
+                <!--end::Breadcrumb-->
+                <!--begin::Title-->
+                <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bolder fs-1 lh-0">Dashboard</h1>
+                <!--end::Title-->
+            </div>
+            <!--end::Page title-->
+            <!--begin::Actions-->
+            
+            <!--end::Actions-->
+        </div>
+        <!--end::Toolbar wrapper-->
+    </div>
+    <!--end::Toolbar container-->
+</div>
+<!--end::Toolbar-->
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <!--begin::Content container-->
+    <div id="kt_app_content_container" class="app-container container-fluid">
+        <!--begin::Row-->
+        <div class="row gx-5 gx-xl-10">
+            <!--begin::Col-->
+            <div class="col-xxl-6 mb-5 mb-xl-10">
+                <!--begin::Chart widget 8-->
+               <div class="row gap-2">
+                   <div class="col">
+                        <div class="card card-flush h-xl-100">
+                            <!--begin::Header-->
+                            <div class="card-header pt-5">
+                                <!--begin::Title-->
+                                <h3 class="card-title align-items-start flex-column">
+                                    <span class="card-label fw-bold text-dark">Total Users</span>
+                                    <span class="text-gray-400 mt-1 fw-semibold fs-6">Users from all channels</span>
+                                </h3>
+                                <!--end::Title-->
+                                <!--begin::Toolbar-->
+                                @* <div class="card-toolbar">
+                                <ul class="nav" id="kt_chart_widget_8_tabs">
+                                <li class="nav-item">
+                                <a class="nav-link btn btn-sm btn-color-muted btn-active btn-active-light fw-bold px-4 me-1" data-bs-toggle="tab" id="kt_chart_widget_8_week_toggle" href="#kt_chart_widget_8_week_tab">Month</a>
+                                </li>
+                                <li class="nav-item">
+                                <a class="nav-link btn btn-sm btn-color-muted btn-active btn-active-light fw-bold px-4 me-1 active" data-bs-toggle="tab" id="kt_chart_widget_8_month_toggle" href="#kt_chart_widget_8_month_tab">Week</a>
+                                </li>
+                                </ul>
+                                </div> *@
+                                <!--end::Toolbar-->
+                            </div>
+                            <!--end::Header-->
+                            <!--begin::Body-->
+                            <div class="card-body pt-6">
+
+
+
+                                <div class="tab-pane fade active show" id="kt_chart_widget_8_month_tab" role="tabpanel">
+                                    <!--begin::Statistics-->
+                                    <div class="mb-5">
+
+                                        <div class="d-flex align-items-center mb-2">
+
+                                            <span class="fs-3x fw-bold text-gray-800 me-2 lh-1 ls-n2" data-kt-countup="true" data-kt-countup-value="@Model.TotalUser" data-kt-countup-suffix="+">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Body-->
+                        </div>
+                   </div>
+
+                    <div class="col">
+                        <div class="card card-flush h-xl-100">
+                            <!--begin::Header-->
+                            <div class="card-header pt-5">
+                                <!--begin::Title-->
+                                <h3 class="card-title align-items-start flex-column">
+                                    <span class="card-label fw-bold text-dark">Total Resumes</span>
+                                    <span class="text-gray-400 mt-1 fw-semibold fs-6">All uploaded resumes</span>
+                                </h3>
+                            </div>
+                            <!--end::Header-->
+                            <!--begin::Body-->
+                            <div class="card-body pt-6">
+
+
+
+                                <div class="tab-pane fade active show" id="kt_chart_widget_8_month_tab" role="tabpanel">
+                                    <!--begin::Statistics-->
+                                    <div class="mb-5">
+
+                                        <div class="d-flex align-items-center mb-2">
+
+                                            <span class="fs-3x fw-bold text-gray-800 me-2 lh-1 ls-n2" data-kt-countup="true" data-kt-countup-value="@Model.TotalTemplete" data-kt-countup-suffix="+">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Body-->
+                        </div>
+                    </div>
+               </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            
+        </div>
+        <!--end: Row-->
+
+    </div>
+    <!--end::Content container-->
+</div>
+<!--end::Content-->

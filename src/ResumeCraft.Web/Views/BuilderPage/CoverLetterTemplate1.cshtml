@@ -1,0 +1,69 @@
+@using Microsoft.AspNetCore.Http
+@model ResumeCraft.Application.Features.CoverLetters.DTOs.CoverLetterDTO
+@{
+    Layout = null;
+
+    var cssUrl = (string assetUrl) => $"{Context.Request.Scheme}://{Context.Request.Host.ToString()}{Url.Content(assetUrl)}";
+
+    var applyingDate = !Model.ApplyingDate.Equals(null) && !Model.ApplyingDate.Value.Equals(null) ? Model.ApplyingDate : null;
+    var applicantsFullName = (Model.ApplicantsFullName is not null) && !Model.ApplicantsFullName.Equals(string.Empty) ? Model.ApplicantsFullName : null;
+    var toWhom = (Model.ToWhom is not null) && !Model.ToWhom.Equals(string.Empty) ? Model.ToWhom : null;
+    var letterContent = (Model.LetterContent is not null) && !Model.LetterContent.Equals(string.Empty) ? Model.LetterContent : null;
+    var jobPosition = (Model.JobPosition is not null) && !Model.JobPosition.Equals(string.Empty) ? Model.JobPosition : null;
+    var companyAddress = (Model.CompanyAddress is not null) && !Model.CompanyAddress.Equals(string.Empty) ? Model.CompanyAddress : null;
+}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="@cssUrl("~/template/vendor/bootstrap/css/bootstrap.min.css")" />
+    <link rel="stylesheet" href="@cssUrl("~/template/css/covert-letter/template_1.css")" />
+</head>
+<body>
+    <main class="rct">
+        <div class="container-fluid">
+            <section class="rct__header">
+                <div class="row">
+                    <div class="rct__header__info col-xs-12">
+                        @if (applyingDate != null)
+                        {
+                            <p class="rct__header__info__applying_date">@applyingDate.Value.ToString("MMMM dd, yyyy")</p>
+                        }
+                        @if (applicantsFullName != null)
+                        {
+                            <h1 class="rct__header__info__username text-uppercase">@applicantsFullName</h1>
+                        }
+                        @if (jobPosition != null)
+                        {
+                            <p class="rct__header__info__job_position h4">@jobPosition</p>
+                        }
+                        @if (companyAddress != null)
+                        {
+                            <p class="rct__header__info__company_address">@companyAddress</p>
+                        }
+                    </div>
+                </div>
+            </section>
+            <section class="rct__content text-justify">
+                @if (toWhom != null)
+                {
+                    <p>Dear, <strong class="rct__header__to_whom">@toWhom</strong></p>
+                }
+                @if (letterContent != null)
+                {
+                    <p>@Html.Raw(letterContent)</p>
+                }
+            </section>
+            <section class="rct__footer">
+                @if (applicantsFullName != null)
+                {
+                    <p class="rct__footer__signature">Sincerely,</p>
+                    <p class="rct__footer__name text-capitalize">@applicantsFullName</p>
+                }
+            </section>
+        </div>
+    </main>
+</body>
+</html>

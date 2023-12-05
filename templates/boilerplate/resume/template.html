@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="../../assets/vendor/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./template_1.css" />
+    </head>
+    <body>
+        <main class="rct">
+            <div class="container-fluid">
+                <section class="rct__section--personal_detail row">
+                    <div class="rct__section--personal_detail__image col-xs-3"></div>
+                    <div class="rct__section--personal_detail__info col-xs-9">
+                        <h1 class="rct__section--personal_detail__info__full_name text-uppercase"></h1>
+                        <div class="rct__section--personal_detail__info__contact_info"></div>
+                    </div>
+                </section>
+                <section class="rct__section--summary row">
+                    <div class="rct__section--summary__title">
+                        <h2>Summary</h2>
+                    </div>
+                    <div class="rct__section--summary__content"></div>
+                </section>
+                <section class="rct__section--experience row">
+                    <div class="rct__section--experience__title">
+                        <h2>Experiences</h2>
+                    </div>
+                    <div class="rct__section--experience__content"></div>
+                </section>
+                <section class="rct__section--skill row">
+                    <div class="rct__section--skill__title">
+                        <h2>Skills</h2>
+                    </div>
+                    <div class="rct__section--skill__content"></div>
+                </section>
+                <section class="rct__section--award row">
+                    <div class="rct__section--award__title">
+                        <h2>Award</h2>
+                    </div>
+                    <div class="rct__section--award__content"></div>
+                </section>
+                <section class="rct__section--certification row">
+                    <div class="rct__section--certification__title">
+                        <h2>Certification</h2>
+                    </div>
+                    <div class="rct__section--certification__content"></div>
+                </section>
+                <section class="rct__section--curricular_activity row">
+                    <div class="rct__section--curricular_activity__title">
+                        <h2>Curricular Activities</h2>
+                    </div>
+                    <div class="rct__section--curricular_activity__content"></div>
+                </section>
+                <section class="rct__section--education row">
+                    <div class="rct__section--education__title">
+                        <h2>Education</h2>
+                    </div>
+                    <div class="rct__section--education__content"></div>
+                </section>
+                <section class="rct__section--interest row">
+                    <div class="rct__section--interest__title">
+                        <h2>Interest</h2>
+                    </div>
+                    <div class="rct__section--interest__content"></div>
+                </section>
+                <section class="rct__section--project row">
+                    <div class="rct__section--project__title">
+                        <h2>Projects</h2>
+                    </div>
+                    <div class="rct__section--project__content"></div>
+                </section>
+                <section class="rct__section--publication row">
+                    <div class="rct__section--publication__title">
+                        <h2>Publications</h2>
+                    </div>
+                    <div class="rct__section--publication__content"></div>
+                </section>
+                <section class="rct__section--reference row">
+                    <div class="rct__section--reference__title">
+                        <h2>References</h2>
+                    </div>
+                    <div class="rct__section--reference__content"></div>
+                </section>
+            </div>
+        </main>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Automatically page break
+                var topSize = document.querySelector(".rct__section--personal_detail").offsetHeight;
+                var section = document.querySelectorAll('[class^="rct__section--"][class$="row"]');
+                var rct = document.querySelector(".rct");
+                var _topSize = topSize;
+
+                for (let i = 0; i < section.length; i++) {
+                    var elem = section[i];
+                    topSize += elem.offsetHeight + 30;
+
+                    if (rct.offsetHeight <= topSize) {
+                        if (elem.nextElementSibling !== null) {
+                            // Create the page break div element
+                            var pageBreakDiv = document.createElement("div");
+                            pageBreakDiv.className = "rct__page_break";
+
+                            elem.parentNode.insertBefore(pageBreakDiv, elem.nextSibling);
+                            topSize = _topSize;
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

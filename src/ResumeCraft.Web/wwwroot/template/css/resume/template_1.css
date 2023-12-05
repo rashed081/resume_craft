@@ -1,0 +1,217 @@
+/*
+####################
+#    Base Style    #
+####################
+*/
+
+@page {
+    size: 210mm 297mm;
+}
+@media print {
+    @page {
+        size: 210mm 297mm;
+    }
+}
+ul {
+    padding: 0;
+    list-style: none;
+}
+ul > li::before {
+    margin-right: 8px;
+    content: "\2713";
+}
+a:hover,
+a:focus {
+    color: #337ab7;
+    text-decoration: none;
+}
+.rct {
+    padding: 0.3in;
+    width: 210mm;
+    height: 297mm;
+}
+.rct__two_column::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+.rct__two_column li {
+    float: left;
+    margin: 5px 0;
+    width: 50%;
+}
+.rct__two_column li:nth-child(2n + 1) {
+    clear: left;
+}
+.rct__page_break {
+    page-break-before: always;
+    padding-top: 0.3in;
+}
+
+/*
+#######################################
+#    Override Bootsrap Class Style    #
+#######################################
+*/
+
+.rct > .container-fluid {
+    padding: 0;
+}
+
+/*
+##################
+#    Sections    #
+##################
+*/
+
+[class^="rct__section--"][class$="__title"] {
+    color: #ed7d31;
+}
+[class^="rct__section--"][class$="__title"] h2 {
+    margin-top: 0;
+}
+[class^="rct__section--"][class$="__content"] {
+    margin-left: 20px;
+}
+section[class^="rct__section--"][class$="row"] {
+    margin-bottom: 30px;
+}
+
+/*
+##########################
+#    Personal Details    #
+##########################
+*/
+
+.rct__section--personal_detail {
+    margin-bottom: 40px;
+}
+.rct__section--personal_detail__image img {
+    width: 135px;
+    height: 135px;
+}
+.rct__section--personal_detail__info__full_name--last_name {
+    color: #ed7d31;
+}
+
+/*
+####################
+#    Experience    #
+####################
+*/
+
+.rct__section--experience__content__container {
+    margin-bottom: 8px;
+}
+.rct__section--experience__content__container__datetime__start_date::after {
+    content: " \2014 ";
+}
+.rct__section--experience__content__container__info__designation::after {
+    content: " \2014 ";
+    font-weight: normal;
+}
+
+/*
+###############
+#    Skill    #
+###############
+*/
+
+/*
+###############
+#    Award    #
+###############
+*/
+
+.rct__section--award__content__container {
+    margin-bottom: 8px;
+}
+.rct__section--award__content__container__title_name::after {
+    content: " \2014 ";
+}
+
+/*
+#######################
+#    Certification    #
+#######################
+*/
+
+.rct__section--certification__content > .table > thead > tr > th:first-child {
+    width: 16%;
+}
+.rct__section--certification__content__container__datetime__end_date::before {
+    content: " \2014 ";
+}
+
+/*
+#############################
+#    Curricular Activity    #
+#############################
+*/
+
+.rct__section--curricular_activity__content__container {
+    margin-bottom: 8px;
+}
+.rct__section--curricular_activity__content__container__datetime__start_date::after {
+    content: " \2014 ";
+}
+
+/*
+###################
+#    Education    #
+###################
+*/
+
+/*
+##################
+#    Interest    #
+##################
+*/
+
+/*
+#################
+#    Project    #
+#################
+*/
+
+.rct__section--project__content__container {
+    margin-bottom: 12px;
+}
+.rct__section--project__content__container__project_name {
+    margin-bottom: 8px;
+    font-style: italic;
+    font-weight: bold;
+}
+.rct__section--project__content__container__description::before {
+    content: "\2192 ";
+    font-weight: bolder;
+    font-size: 16px;
+}
+
+/*
+#####################
+#    Publication    #
+#####################
+*/
+
+.rct__section--publication__content__container {
+    margin-bottom: 8px;
+}
+.rct__section--publication__content__container__info__title_name::after {
+    content: " \2014 ";
+    color: #000000;
+}
+.rct__section--publication__content__container__divider::before {
+    margin-left: -30px;
+    content: "\2014\2014";
+}
+
+/*
+###################
+#    Reference    #
+###################
+*/
+
+.rct__section--reference__content__container {
+    margin-bottom: 30px;
+}

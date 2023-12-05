@@ -1,0 +1,50 @@
+@using ResumeCraft.Application.Features.CoverLetters;
+@using ResumeCraft.Application.Features.CoverLetters.Models
+@model CoverLetterInputModel
+@{
+    ViewData["Title"] = "CoverLetter";
+}
+
+<div class="row" style="min-height: 130vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;">
+    <div class="col-md-8 mb-4">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h5 class="mb-0" style="text-align:center">Job Application Cover</h5>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-antiforgery="true" asp-area="" asp-action="CoverLetterCreate" asp-controller="CoverLetter">
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" class="form-control form-control-sm" id="ToWhom" name="ToWhom" asp-for="ToWhom">
+                                <label class="form-label" for="form7Example1">Recipient Name</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="date" class="form-control form-control-sm" id="ApplyingDate" name="ApplyingDate" asp-for="ApplyingDate">
+                                <label class="form-label" for="form7Example2">ApplyingDate</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="text" class="form-control form-control-sm" id="JobPosition" name="JobPosition" asp-for="JobPosition">
+                        <label class="form-label" for="form7Example3">Job Position</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="text" id="CompanyAddress" name="CompanyAddress" asp-for="CompanyAddress" class="form-control" />
+                        <label class="form-label" for="form7Example4">Company Address</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <textarea class="form-control" id="LetterContent" name="LetterContent" asp-for="LetterContent" rows="4"></textarea>
+                        <label class="form-label" for="form7Example7">Content</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

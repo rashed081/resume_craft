@@ -1,0 +1,18 @@
+@model ConfirmEmaiMessageModel
+@{
+    ViewData["Title"] = "Confirm Email";
+    Layout = "_AccountLayout";
+}
+
+<div class="w-lg-500px p-10 p-lg-15 mx-auto">
+    @if (Model.HasErrorInEmailConfiramtion)
+    {
+        <h1>Dear <strong style="color:#FF914D;">@Model.Name</strong>, Some error happend while confirming your registration</h1>
+        <p>Please <strong><a asp-action="contact" asp-controller="home" asp-area="">contuct us</a></strong> with this issue.</p>
+    }
+    else
+    {
+        <h1>Dear <strong style="color:#FF914D;">@Model.Name</strong>, Your registration successfull</h1>
+        <p class="fs-5"> Please <strong><a asp-action="login" asp-controller="account" asp-area="">login</a></strong> now.</p>
+    }
+</div>
